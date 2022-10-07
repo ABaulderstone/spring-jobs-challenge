@@ -69,4 +69,13 @@ public class Job {
   public Temp getTemp() {
     return temp;
   }
+
+  public Job(String name, Date startDate, Date endDate, Temp temp) {
+    this.name = name;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.temp = temp;
+  }
+
+  public Job() {}
 }

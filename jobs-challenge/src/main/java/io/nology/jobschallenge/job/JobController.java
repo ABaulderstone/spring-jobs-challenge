@@ -1,7 +1,10 @@
 package io.nology.jobschallenge.job;
 
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +21,9 @@ public class JobController {
   private JobService jobService;
 
   @GetMapping
-  public String index() {
-    return "All Jobs";
+  public ResponseEntity<List<Job>> index() {
+    List<Job> jobs = this.jobService.index();
+    return new ResponseEntity<>(jobs, HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
@@ -28,8 +32,9 @@ public class JobController {
   }
 
   @PostMapping
-  public String create(@Valid @RequestBody JobCreateDTO data) {
-    return this.jobService.create(data);
+  public ResponseEntity<Job> create(@Valid @RequestBody JobCreateDTO data) {
+    Job createdJob = this.jobService.create(data);
+    return new ResponseEntity<>(createdJob, HttpStatus.CREATED);
   }
 
   @PatchMapping("/{id}")
