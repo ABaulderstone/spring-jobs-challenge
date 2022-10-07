@@ -11,8 +11,9 @@ public class TempService {
   @Autowired
   private TempRepository tempRepository;
 
-  public String create() {
-    this.tempRepository.count();
-    return "Hello";
+  public Temp create(TempCreateDTO data) {
+    Temp newTemp = new Temp(data.getFirstName(), data.getLastName());
+    this.tempRepository.save(newTemp);
+    return newTemp;
   }
 }

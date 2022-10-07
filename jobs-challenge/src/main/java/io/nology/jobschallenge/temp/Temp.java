@@ -56,4 +56,9 @@ public class Temp {
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
+
+  public Temp(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 }
