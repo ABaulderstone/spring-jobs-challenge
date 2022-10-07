@@ -1,5 +1,6 @@
 package io.nology.jobschallenge.job;
 
+import io.nology.jobschallenge.exceptions.TempNotFoundException;
 import io.nology.jobschallenge.temp.Temp;
 import io.nology.jobschallenge.temp.TempRepository;
 import java.sql.Date;
@@ -34,7 +35,7 @@ public class JobService {
 
     Optional<Temp> maybeTemp = this.tempRepository.findById(tempId);
     if (maybeTemp.isEmpty()) {
-      throw new NoSuchElementException();
+      throw new TempNotFoundException();
     }
 
     Job assignedJob = new Job(name, startDate, endDate, maybeTemp.get());
