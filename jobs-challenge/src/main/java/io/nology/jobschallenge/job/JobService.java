@@ -38,6 +38,7 @@ public class JobService {
       throw new TempNotFoundException();
     }
 
+    System.out.println(maybeTemp.get());
     Job assignedJob = new Job(name, startDate, endDate, maybeTemp.get());
     this.jobRepository.save(assignedJob);
     return assignedJob;

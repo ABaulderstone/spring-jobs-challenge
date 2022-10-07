@@ -1,5 +1,6 @@
 package io.nology.jobschallenge.job;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.nology.jobschallenge.temp.Temp;
 import java.sql.Date;
 import javax.persistence.Column;
@@ -28,6 +29,7 @@ public class Job {
 
   @ManyToOne
   @JoinColumn(name = "temp_id", nullable = true)
+  @JsonBackReference
   Temp temp;
 
   public void setEndDate(Date endDate) {

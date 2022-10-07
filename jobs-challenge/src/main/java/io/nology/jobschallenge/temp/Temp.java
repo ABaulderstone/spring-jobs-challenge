@@ -57,8 +57,11 @@ public class Temp {
     this.lastName = lastName;
   }
 
-  public Temp(String firstName, String lastName) {
+  public Temp(String firstName, String lastName, Set<Job> jobs) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.jobs = jobs;
   }
+
+  public Temp() {}
 }

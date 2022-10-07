@@ -1,5 +1,6 @@
 package io.nology.jobschallenge.temp;
 
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,9 @@ public class TempController {
   private TempService tempService;
 
   @GetMapping
-  public String index() {
-    return "All temps";
+  public ResponseEntity<List<Temp>> index() {
+    List<Temp> temps = this.tempService.index();
+    return new ResponseEntity<>(temps, HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
