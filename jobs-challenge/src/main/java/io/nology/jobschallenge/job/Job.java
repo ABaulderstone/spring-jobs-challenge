@@ -1,6 +1,9 @@
 package io.nology.jobschallenge.job;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.nology.jobschallenge.temp.Temp;
 import java.sql.Date;
@@ -15,10 +18,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-@JsonIdentityInfo(
-  generator = ObjectIdGenerators.PropertyGenerator.class,
-  property = "id"
-)
 public class Job {
 
   @Id
@@ -36,6 +35,7 @@ public class Job {
 
   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "temp_id", nullable = true)
+  @JsonIgnoreProperties("jobs")
   Temp temp;
 
   public void setEndDate(Date endDate) {

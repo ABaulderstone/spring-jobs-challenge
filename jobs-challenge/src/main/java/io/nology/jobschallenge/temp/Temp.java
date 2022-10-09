@@ -1,9 +1,6 @@
 package io.nology.jobschallenge.temp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.nology.jobschallenge.job.Job;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -16,10 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-@JsonIdentityInfo(
-  generator = ObjectIdGenerators.PropertyGenerator.class,
-  property = "id"
-)
 public class Temp {
 
   @Id
@@ -37,7 +30,7 @@ public class Temp {
     fetch = FetchType.EAGER,
     cascade = CascadeType.ALL
   )
-  // @JsonManagedReference
+  @JsonIgnoreProperties("temp")
   Set<Job> jobs;
 
   public String getFirstName() {
