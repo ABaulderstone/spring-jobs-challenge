@@ -1,15 +1,25 @@
 package io.nology.jobschallenge.temp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.nology.jobschallenge.job.Job;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class,
+  property = "id"
+)
 public class Temp {
 
   @Id
@@ -22,7 +32,12 @@ public class Temp {
   @Column
   String lastName;
 
-  @OneToMany(mappedBy = "temp")
+  @OneToMany(
+    mappedBy = "temp",
+    fetch = FetchType.EAGER,
+    cascade = CascadeType.ALL
+  )
+  // @JsonManagedReference
   Set<Job> jobs;
 
   public String getFirstName() {

@@ -5,7 +5,6 @@ import io.nology.jobschallenge.temp.Temp;
 import io.nology.jobschallenge.temp.TempRepository;
 import java.sql.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +45,9 @@ public class JobService {
 
   public List<Job> index() {
     return this.jobRepository.findAll();
+  }
+
+  public Optional<Job> findById(Long id) {
+    return this.jobRepository.findById(id);
   }
 }

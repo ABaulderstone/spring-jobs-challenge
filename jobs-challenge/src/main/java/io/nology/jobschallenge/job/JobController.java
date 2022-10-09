@@ -1,6 +1,7 @@
 package io.nology.jobschallenge.job;
 
 import java.util.List;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,8 +28,9 @@ public class JobController {
   }
 
   @GetMapping("/{id}")
-  public String show(@PathVariable Integer id) {
-    return "Job with ID: " + id;
+  public ResponseEntity<Job> show(@PathVariable Long id) {
+    Optional<Job> maybeJob = this.jobService.findById(id);
+    return new ResponseEntity<>(maybeJob.get(), HttpStatus.OK);
   }
 
   @PostMapping
