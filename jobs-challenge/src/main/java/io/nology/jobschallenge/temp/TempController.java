@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,8 +22,10 @@ public class TempController {
   private TempService tempService;
 
   @GetMapping
-  public ResponseEntity<List<Temp>> index() {
-    List<Temp> temps = this.tempService.index();
+  public ResponseEntity<List<Temp>> index(
+    @RequestParam(required = false) Long jobId
+  ) {
+    List<Temp> temps = this.tempService.index(jobId);
     return new ResponseEntity<>(temps, HttpStatus.OK);
   }
 

@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class TempExceptionController {
+public class JobExceptionController {
 
-  @ExceptionHandler(value = TempNotFoundException.class)
-  public ResponseEntity<Object> notFoundException(
-    TempNotFoundException exception
+  @ExceptionHandler(value = JobNotExistException.class)
+  public ResponseEntity<Object> notExistException(
+    JobNotExistException exception
   ) {
-    return new ResponseEntity<>("Temp not found", HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>("Job does not exist", HttpStatus.BAD_REQUEST);
   }
 }
