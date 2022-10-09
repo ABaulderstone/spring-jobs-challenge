@@ -43,8 +43,14 @@ public class JobService {
     return assignedJob;
   }
 
-  public List<Job> index() {
-    return this.jobRepository.findAll();
+  public List<Job> index(Boolean assigned) {
+    if (assigned == null) {
+      return this.jobRepository.findAll();
+    }
+    if (assigned == true) {
+      return this.jobRepository.findAllAssigned();
+    }
+    return this.jobRepository.findAllUnassigned();
   }
 
   public Optional<Job> findById(Long id) {

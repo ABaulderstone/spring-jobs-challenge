@@ -1,6 +1,5 @@
 package io.nology.jobschallenge.job;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.nology.jobschallenge.temp.Temp;
