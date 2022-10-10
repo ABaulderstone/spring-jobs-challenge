@@ -1,6 +1,6 @@
 package io.nology.jobschallenge.job;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -11,18 +11,18 @@ public class JobCreateDTO {
   String name;
 
   @FutureOrPresent
-  Date startDate;
+  LocalDate startDate;
 
   @FutureOrPresent
-  Date endDate;
+  LocalDate endDate;
 
   @Min(1)
   Long tempId;
 
   public JobCreateDTO(
     @NotBlank String name,
-    @FutureOrPresent Date startDate,
-    @FutureOrPresent Date endDate,
+    @FutureOrPresent LocalDate startDate,
+    @FutureOrPresent LocalDate endDate,
     @Min(1) Long tempId
   ) {
     this.name = name;
@@ -31,7 +31,7 @@ public class JobCreateDTO {
     this.tempId = tempId;
   }
 
-  public Date getEndDate() {
+  public LocalDate getEndDate() {
     return endDate;
   }
 
@@ -39,7 +39,7 @@ public class JobCreateDTO {
     return name;
   }
 
-  public Date getStartDate() {
+  public LocalDate getStartDate() {
     return startDate;
   }
 
@@ -47,7 +47,7 @@ public class JobCreateDTO {
     return tempId;
   }
 
-  public void setEndDate(Date endDate) {
+  public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
   }
 
@@ -55,7 +55,7 @@ public class JobCreateDTO {
     this.name = name;
   }
 
-  public void setStartDate(Date startDate) {
+  public void setStartDate(LocalDate startDate) {
     this.startDate = startDate;
   }
 

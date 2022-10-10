@@ -2,9 +2,7 @@ package io.nology.jobschallenge.temp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.nology.jobschallenge.job.Job;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -76,11 +74,16 @@ public class Temp {
 
   public Temp() {}
 
-  public boolean isAvailableOnSpecificedDate(Date specifiedDate) {
+  public boolean isAvailableOnSpecificedDate(LocalDate specifiedDate) {
     if (this.jobs.isEmpty()) return true;
 
     return !(
-      this.jobs.stream().anyMatch(job -> job.getEndDate().before(specifiedDate))
+      this.jobs.stream()
+        .anyMatch(
+          job ->
+            job.getEndDate().isBefore(specifiedDate) ||
+            job.getEndDate().isEqual(specifiedDate)
+        )
     );
   }
 }

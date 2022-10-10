@@ -1,6 +1,6 @@
 package io.nology.jobschallenge.temp;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +10,7 @@ public interface TempRepository extends JpaRepository<Temp, Long> {
   @Query(
     "SELECT t FROM Temp as t  LEFT JOIN t.jobs as j WHERE(j.endDate < :startDate or j is null)"
   )
-  List<Temp> availableOn(@Param("startDate") Date startDate);
+  List<Temp> availableOn(@Param("startDate") LocalDate startDate);
 }
 // @Query("SELECT j FROM Job j WHERE j.temp <> null")
 // List<Job> findAllAssigned();

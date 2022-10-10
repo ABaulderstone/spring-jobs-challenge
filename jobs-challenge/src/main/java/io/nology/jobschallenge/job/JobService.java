@@ -5,6 +5,7 @@ import io.nology.jobschallenge.exceptions.TempNotExistException;
 import io.nology.jobschallenge.temp.Temp;
 import io.nology.jobschallenge.temp.TempRepository;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -24,8 +25,8 @@ public class JobService {
   public Job create(JobCreateDTO data) {
     Long tempId = data.getTempId();
     String name = data.getName();
-    Date startDate = data.getStartDate();
-    Date endDate = data.getEndDate();
+    LocalDate startDate = data.getStartDate();
+    LocalDate endDate = data.getEndDate();
 
     if (tempId == null) {
       Job unassignedJob = new Job(name, startDate, endDate, null);

@@ -2,6 +2,7 @@ package io.nology.jobschallenge.job;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.nology.jobschallenge.temp.Temp;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,17 +25,17 @@ public class Job {
   String name;
 
   @Column
-  Date startDate;
+  LocalDate startDate;
 
   @Column
-  Date endDate;
+  LocalDate endDate;
 
   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "temp_id", nullable = true)
   @JsonIgnoreProperties("jobs")
   Temp temp;
 
-  public void setEndDate(Date endDate) {
+  public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
   }
 
@@ -46,7 +47,7 @@ public class Job {
     this.name = name;
   }
 
-  public void setStartDate(Date startDate) {
+  public void setStartDate(LocalDate startDate) {
     this.startDate = startDate;
   }
 
@@ -54,7 +55,7 @@ public class Job {
     this.temp = temp;
   }
 
-  public Date getEndDate() {
+  public LocalDate getEndDate() {
     return endDate;
   }
 
@@ -66,7 +67,7 @@ public class Job {
     return name;
   }
 
-  public Date getStartDate() {
+  public LocalDate getStartDate() {
     return startDate;
   }
 
@@ -74,7 +75,7 @@ public class Job {
     return temp;
   }
 
-  public Job(String name, Date startDate, Date endDate, Temp temp) {
+  public Job(String name, LocalDate startDate, LocalDate endDate, Temp temp) {
     this.name = name;
     this.startDate = startDate;
     this.endDate = endDate;
