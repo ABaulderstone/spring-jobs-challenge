@@ -32,8 +32,8 @@ public class JobController {
 
   @GetMapping("/{id}")
   public ResponseEntity<Job> show(@PathVariable Long id) {
-    Optional<Job> maybeJob = this.jobService.findById(id);
-    return new ResponseEntity<>(maybeJob.get(), HttpStatus.OK);
+    Job foundJob = this.jobService.findById(id);
+    return new ResponseEntity<>(foundJob, HttpStatus.OK);
   }
 
   @PostMapping

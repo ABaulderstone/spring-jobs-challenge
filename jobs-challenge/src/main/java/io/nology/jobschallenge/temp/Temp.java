@@ -76,7 +76,7 @@ public class Temp {
 
   public boolean isAvailableOnSpecificedDate(LocalDate specifiedDate) {
     if (this.jobs.isEmpty()) return true;
-    System.out.println(specifiedDate);
+
     return !(
       this.jobs.stream()
         .anyMatch(

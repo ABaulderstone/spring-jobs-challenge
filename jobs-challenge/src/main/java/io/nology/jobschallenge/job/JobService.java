@@ -1,5 +1,6 @@
 package io.nology.jobschallenge.job;
 
+import io.nology.jobschallenge.exceptions.NotFoundException;
 import io.nology.jobschallenge.exceptions.TempNotAvailableException;
 import io.nology.jobschallenge.exceptions.TempNotExistException;
 import io.nology.jobschallenge.temp.Temp;
@@ -39,7 +40,6 @@ public class JobService {
     }
 
     Temp foundTemp = maybeTemp.get();
-    System.out.println(startDate);
     if (!foundTemp.isAvailableOnSpecificedDate(startDate)) {
       throw new TempNotAvailableException();
     }
@@ -59,7 +59,13 @@ public class JobService {
     return this.jobRepository.findAllUnassigned();
   }
 
-  public Optional<Job> findById(Long id) {
-    return this.jobRepository.findById(id);
+  public Job findById(Long id) {
+    Optional<Job> maybeJob = this.jobRepository.findById(id);
+    if (maybeJob.isEmpty()) {
+      throw new NotFoundException(
+        String.format("Job with id: %d does not exist", id)
+      );
+    }
+    return maybeJob.get();
   }
 }
