@@ -4,7 +4,6 @@ import io.nology.jobschallenge.exceptions.TempNotAvailableException;
 import io.nology.jobschallenge.exceptions.TempNotExistException;
 import io.nology.jobschallenge.temp.Temp;
 import io.nology.jobschallenge.temp.TempRepository;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
