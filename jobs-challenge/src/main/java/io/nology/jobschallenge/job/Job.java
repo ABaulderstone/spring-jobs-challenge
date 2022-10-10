@@ -2,7 +2,7 @@ package io.nology.jobschallenge.job;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.nology.jobschallenge.temp.Temp;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -8,10 +8,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class TempExceptionController {
 
-  @ExceptionHandler(value = TempNotFoundException.class)
+  @ExceptionHandler(value = TempNotExistException.class)
   public ResponseEntity<Object> notFoundException(
-    TempNotFoundException exception
+    TempNotExistException exception
   ) {
-    return new ResponseEntity<>("Temp not found", HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>("Temp not found", HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(value = TempNotAvailableException.class)
+  public ResponseEntity<Object> notAvailableException(
+    TempNotAvailableException exception
+  ) {
+    return new ResponseEntity<>(
+      "Temp is not available on that date",
+      HttpStatus.BAD_REQUEST
+    );
   }
 }
