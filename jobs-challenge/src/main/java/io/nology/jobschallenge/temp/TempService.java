@@ -3,6 +3,7 @@ package io.nology.jobschallenge.temp;
 import io.nology.jobschallenge.exceptions.JobNotExistException;
 import io.nology.jobschallenge.job.Job;
 import io.nology.jobschallenge.job.JobRepository;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -35,6 +36,8 @@ public class TempService {
       throw new JobNotExistException();
     }
 
-    return this.tempRepository.findAll();
+    Date startDate = maybeJob.get().getStartDate();
+
+    return this.tempRepository.availableOn(startDate);
   }
 }
