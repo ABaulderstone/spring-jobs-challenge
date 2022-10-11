@@ -71,24 +71,27 @@ public class JobService {
   }
 
   public Job updateJob(Long id, JobUpdateDTO data) {
+    System.out.println(id);
     Job foundJob = this.findById(id);
-
+    System.out.println(foundJob.id);
     String name = data.getName();
     LocalDate startDate = data.getStartDate();
     LocalDate endDate = data.getEndDate();
     Long tempId = data.getTempId();
 
-    Optional<Temp> maybeTemp = this.tempRepository.findById(tempId);
-    if (maybeTemp.isEmpty()) {
-      throw new TempNotExistException();
-    }
+    if (tempId != null) {
+      Optional<Temp> maybeTemp = this.tempRepository.findById(tempId);
+      if (maybeTemp.isEmpty()) {
+        throw new TempNotExistException();
+      }
 
-    Temp foundTemp = maybeTemp.get();
-    if (!foundTemp.isAvailableOnSpecificedDate(startDate)) {
-      throw new TempNotAvailableException();
-    }
+      Temp foundTemp = maybeTemp.get();
+      if (!foundTemp.isAvailableOnSpecificedDate(startDate)) {
+        throw new TempNotAvailableException();
+      }
 
-    foundJob.setTemp(foundTemp);
+      foundJob.setTemp(foundTemp);
+    }
 
     if (name.trim().length() > 0) {
       foundJob.setName(data.name);
@@ -102,7 +105,8 @@ public class JobService {
       foundJob.setEndDate(endDate);
     }
 
-    this.jobRepository.save(foundJob);
-    return foundJob;
+    System.out.println(foundJob.toString());
+
+    return this.jobRepository.save(foundJob);
   }
 }
