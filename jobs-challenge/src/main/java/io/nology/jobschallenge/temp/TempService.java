@@ -30,6 +30,7 @@ public class TempService {
     if (jobId == null) {
       return this.tempRepository.findAll();
     }
+
     Optional<Job> maybeJob = this.jobRepository.findById(jobId);
 
     if (maybeJob.isEmpty()) {

@@ -43,7 +43,10 @@ public class JobController {
   }
 
   @PatchMapping("/{id}")
-  public String update(@PathVariable Integer id) {
-    return "Update job " + id;
+  public Job update(
+    @PathVariable Long id,
+    @Valid @RequestBody JobUpdateDTO data
+  ) {
+    return this.jobService.updateJob(id, data);
   }
 }
