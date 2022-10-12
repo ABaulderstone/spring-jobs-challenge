@@ -1,10 +1,12 @@
 package io.nology.jobschallenge.job;
 
+import io.nology.jobschallenge.constraints.ValidEndDate;
 import java.time.LocalDate;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+@ValidEndDate
 public class JobCreateDTO {
 
   @NotBlank
