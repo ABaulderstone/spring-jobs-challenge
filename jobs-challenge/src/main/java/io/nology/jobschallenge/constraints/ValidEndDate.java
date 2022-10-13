@@ -7,7 +7,9 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = { EndDateValidator.class })
+@Constraint(
+  validatedBy = { EndDateValidatorCreate.class, EndDateValidatorUpdate.class }
+)
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidEndDate {

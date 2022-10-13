@@ -1,11 +1,10 @@
-package io.nology.jobschallenge.constraints;
-
 import io.nology.jobschallenge.job.JobCreateDTO;
+import io.nology.jobschallenge.job.JobUpdateDTO;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class EndDateValidator
-  implements ConstraintValidator<ValidEndDate, JobCreateDTO> {
+public class EndDateValidatorUpdate
+  implements ConstraintValidator<ValidEndDate, JobUpdateDTO> {
 
   @Override
   public void initialize(ValidEndDate constraintAnnotation) {
@@ -15,7 +14,7 @@ public class EndDateValidator
 
   @Override
   public boolean isValid(
-    JobCreateDTO value,
+    JobUpdateDTO value,
     ConstraintValidatorContext context
   ) {
     return !(value.getEndDate().isBefore(value.getStartDate()));
