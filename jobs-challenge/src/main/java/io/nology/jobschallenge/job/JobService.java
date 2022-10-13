@@ -59,21 +59,21 @@ public class JobService {
     return this.jobRepository.findAllUnassigned();
   }
 
-  public Job findById(Long id) {
-    Optional<Job> maybeJob = this.jobRepository.findById(id);
-
-    if (maybeJob.isEmpty()) {
-      throw new NotFoundException(
-        String.format("Job with id: %d does not exist", id)
-      );
-    }
-    return maybeJob.get();
+  public Optional<Job> findById(Long id) {
+    return this.jobRepository.findById(id);
   }
 
   public Job updateJob(Long id, JobUpdateDTO data) {
-    System.out.println(id);
-    Job foundJob = this.findById(id);
-    System.out.println(foundJob.id);
+    Optional<Job> maybeJob = this.findById(id);
+
+    if (maybeJob.isEmpty()) {
+      throw new NotFoundException(
+        String.format("Job with id: %d not found", id)
+      );
+    }
+
+    Job foundJob = maybeJob.get();
+
     String name = data.getName();
     LocalDate startDate = data.getStartDate();
     LocalDate endDate = data.getEndDate();

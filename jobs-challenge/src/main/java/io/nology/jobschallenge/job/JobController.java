@@ -1,6 +1,8 @@
 package io.nology.jobschallenge.job;
 
+import io.nology.jobschallenge.exceptions.NotFoundException;
 import java.util.List;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +33,14 @@ public class JobController {
 
   @GetMapping("/{id}")
   public ResponseEntity<Job> show(@PathVariable Long id) {
-    Job foundJob = this.jobService.findById(id);
-    return new ResponseEntity<>(foundJob, HttpStatus.OK);
+    Optional<Job> maybeJob = this.jobService.findById(id);
+
+    if (maybeJob.isEmpty()) {
+      throw new NotFoundException(
+        String.format("Job with id: %d not found", id)
+      );
+    }
+    return new ResponseEntity<>(maybeJob.get(), HttpStatus.OK);
   }
 
   @PostMapping
