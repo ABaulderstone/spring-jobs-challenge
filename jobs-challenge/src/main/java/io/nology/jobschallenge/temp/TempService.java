@@ -26,6 +26,10 @@ public class TempService {
     return newTemp;
   }
 
+  public Optional<Temp> findById(Long id) {
+    return this.tempRepository.findById(id);
+  }
+
   public List<Temp> index(Long jobId) {
     if (jobId == null) {
       return this.tempRepository.findAll();

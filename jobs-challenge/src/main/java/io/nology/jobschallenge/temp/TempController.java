@@ -1,6 +1,8 @@
 package io.nology.jobschallenge.temp;
 
 import java.util.List;
+import java.util.Optional;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.nology.jobschallenge.exceptions.NotFoundException;
 
 @RestController
 @RequestMapping("/temps")
@@ -30,8 +34,12 @@ public class TempController {
   }
 
   @GetMapping("/{id}")
-  public String show(@PathVariable Integer id) {
-    return "temp with ID: " + id;
+  public ResponseEntity<Temp> show(@PathVariable Long id) {
+    Optional<Temp> maybeTemp = this.tempService.findById(id);
+    if(maybeTemp.isEmpty()) {
+      throw new NotFoundException(String.format("Could not find Temp with ID: %d", id))
+    }
+    return new ResponseEntity<>(maybeTemp.get(), HttpStatus.OK)
   }
 
   @PostMapping

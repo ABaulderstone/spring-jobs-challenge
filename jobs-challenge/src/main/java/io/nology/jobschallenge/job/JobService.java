@@ -4,7 +4,7 @@ import io.nology.jobschallenge.exceptions.NotFoundException;
 import io.nology.jobschallenge.exceptions.TempNotAvailableException;
 import io.nology.jobschallenge.exceptions.TempNotExistException;
 import io.nology.jobschallenge.temp.Temp;
-import io.nology.jobschallenge.temp.TempRepository;
+import io.nology.jobschallenge.temp.TempService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +20,7 @@ public class JobService {
   private JobRepository jobRepository;
 
   @Autowired
-  private TempRepository tempRepository;
+  private TempService tempService;
 
   public Job create(JobCreateDTO data) {
     Long tempId = data.getTempId();
@@ -34,7 +34,7 @@ public class JobService {
       return unassignedJob;
     }
 
-    Optional<Temp> maybeTemp = this.tempRepository.findById(tempId);
+    Optional<Temp> maybeTemp = this.tempService.findById(tempId);
     if (maybeTemp.isEmpty()) {
       throw new TempNotExistException();
     }
@@ -80,7 +80,7 @@ public class JobService {
     Long tempId = data.getTempId();
 
     if (tempId != null) {
-      Optional<Temp> maybeTemp = this.tempRepository.findById(tempId);
+      Optional<Temp> maybeTemp = this.tempService.findById(tempId);
       if (maybeTemp.isEmpty()) {
         throw new TempNotExistException();
       }
