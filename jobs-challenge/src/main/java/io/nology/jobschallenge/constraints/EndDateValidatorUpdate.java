@@ -8,7 +8,6 @@ public class EndDateValidatorUpdate
 
   @Override
   public void initialize(ValidEndDate constraintAnnotation) {
-    // TODO Auto-generated method stub
     ConstraintValidator.super.initialize(constraintAnnotation);
   }
 

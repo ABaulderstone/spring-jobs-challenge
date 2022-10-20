@@ -3,7 +3,6 @@ package io.nology.jobschallenge.temp;
 import io.nology.jobschallenge.exceptions.JobNotExistException;
 import io.nology.jobschallenge.job.Job;
 import io.nology.jobschallenge.job.JobRepository;
-import io.nology.jobschallenge.job.JobService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
